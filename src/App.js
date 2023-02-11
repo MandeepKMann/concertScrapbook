@@ -22,6 +22,8 @@ function App() {
         })
     }
 
+    
+
     return (
         <div className="App">
             <header>
@@ -32,7 +34,7 @@ function App() {
                     <nav>
                         <Link to='/'>Home</Link>
                         {/* Removes login button if we are logged in */}
-                        {!isAuth ? <Link to='/login'>Log In</Link> : <button onClick={signUserOut}>Log Out</button>}
+                        {!isAuth ? <Link to='/login'>Log In</Link> : <Link onClick={signUserOut}>Log Out</Link>}
                         <Link to='/createpost'>New Post</Link>
                     </nav>
                 </div>
