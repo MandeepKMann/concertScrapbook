@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore'
-import { db } from '../firebase.js';
+import { db, auth } from '../firebase.js';
 
-const Home = () => {
+const Home = (isAuth) => {
 
     const [postsList, setPostsList] = useState([]);
     const postsCollectionRef = collection(db, 'posts')
@@ -32,14 +32,16 @@ const Home = () => {
                             </h2>
                         </div>
                         <div className="deletePost">
-                            <button 
-                                className="deleteButton"
-                                onClick={() => {
-                                    deletePost(post.id);
-                                }}
-                            >
-                                x
-                            </button>
+                            {isAuth && post.author.id === auth.currentUser.uid && (
+                                <button
+                                    onClick={() => {
+                                        deletePost(post.id);
+                                    }}
+                                >
+                                    {" "}
+                                    x
+                                </button>
+                            )}
                         </div>
                         <div className="postText">
                             {post.postText}
