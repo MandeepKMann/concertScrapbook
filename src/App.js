@@ -34,15 +34,21 @@ function App() {
                     <nav>
                         <Link to='/'>Home</Link>
                         {/* Removes login button if we are logged in */}
-                        {!isAuth ? <Link to='/login'>Log In</Link> : <Link onClick={signUserOut}>Log Out</Link>}
-                        <Link to='/createpost'>New Post</Link>
+                        {!isAuth ? (
+                            <Link to="/login">Login</Link>
+                        ) : (
+                            <>
+                                <Link to="/createpost">Create Post</Link>
+                                <Link onClick={signUserOut}>Log Out</Link>
+                            </>
+                        )}
                     </nav>
                 </div>
             </header>
             <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Login setIsAuth={setIsAuth}/>} />
-                <Route path='/createpost' element={<CreatePost />} />
+                <Route path="/" element={<Home isAuth={isAuth} />} />
+                <Route path="/createpost" element={<CreatePost isAuth={isAuth} />} />
+                <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
             </Routes>
         </div>
     );
